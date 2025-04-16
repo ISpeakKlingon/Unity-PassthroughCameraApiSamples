@@ -53,9 +53,20 @@ namespace PassthroughCameraSamples
                     $"PCA: Passthrough Camera requires permission(s) {string.Join(" and ", PassthroughCameraPermissions.CameraPermissions)}. Waiting for them to be granted...");
                 return;
             }
+            else
+            {
+                _ = StartCoroutine(WaitAndInitialize());
+            }
 
+        }
+
+        private IEnumerator WaitAndInitialize()
+        {
+            yield return null;
+            yield return null;
             PCD.DebugMessage(LogType.Log, "PCA: All permissions have been granted");
             _ = StartCoroutine(InitializeWebCamTexture());
+
         }
 
         private void OnDisable()
